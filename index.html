@@ -46,6 +46,10 @@
         <p class="success" id="successMessage"></p>
     </form>
 
+    <!-- Zona para mostrar los registros admitidos -->
+    <h3>Registros Admitidos</h3>
+    <ul id="registrosAdmitidos"></ul>
+
     <script>
         function sanitizeInput(input) {
             return input.replace(/<[^>]*>/g, "").trim();
@@ -86,11 +90,19 @@
             }
             
             if (!valido) {
-                event.preventDefault(); // Evita que se envíe el formulario si hay errores
-                successMessage.textContent = ""; // Limpiar mensaje de éxito si hay errores
+                event.preventDefault();
+                successMessage.textContent = "";
             } else {
-                event.preventDefault(); // Para mostrar el mensaje sin enviar realmente el formulario
+                event.preventDefault();
                 successMessage.textContent = "Formulario enviado con éxito.";
+
+                let registrosAdmitidos = document.getElementById("registrosAdmitidos");
+                let nuevoRegistro = document.createElement("li");
+                nuevoRegistro.textContent = `Nombre: ${nombre}, Correo: ${email}`;
+                registrosAdmitidos.appendChild(nuevoRegistro);
+
+                nombreInput.value = "";
+                emailInput.value = "";
             }
         });
     </script>
